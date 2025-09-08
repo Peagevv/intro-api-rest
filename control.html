@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Dispositivos IoT</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-microchip"></i> Control IoT
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="control.html">Control</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="monitoreo.html">Monitoreo</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1>Control de Dispositivos IoT</h1>
+                    <a href="monitoreo.html" class="btn btn-success">
+                        <i class="fas fa-chart-line"></i> Ir al Monitoreo
+                    </a>
+                </div>
+                
+                <!-- Alertas -->
+                <div id="alertContainer"></div>
+                
+                <!-- Panel de control -->
+                <div class="card mb-4">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Panel de Control</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3" id="controlPanel">
+                            <!-- Los botones de control se generarán dinámicamente con JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Último estado -->
+                <div class="card mb-4">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">Estado Actual del Dispositivo</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <h2 id="currentStatus" class="display-6">Desconocido</h2>
+                    </div>
+                </div>
+                
+                <!-- Formulario para registro manual -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Registro Manual</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="itemForm">
+                            <div class="mb-3">
+                                <label for="status" class="form-label">Estado</label>
+                                <select class="form-select" id="status" required>
+                                    <option value="">Seleccione un estado</option>
+                                    <option value="ADELANTE">ADELANTE</option>
+                                    <option value="ATRAS">ATRAS</option>
+                                    <option value="DETENER">DETENER</option>
+                                    <option value="ADELANTE DERECHA">ADELANTE DERECHA</option>
+                                    <option value="ADELANTE IZQUIERDA">ADELANTE IZQUIERDA</option>
+                                    <option value="ATRAS DERECHA">ATRAS DERECHA</option>
+                                    <option value="ATRAS IZQUIERDA">ATRAS IZQUIERDA</option>
+                                    <option value="GIRO 90 GRADOS DERECHA">GIRO 90 GRADOS DERECHA</option>
+                                    <option value="GIRO 90 GRADOS IZQUIERDA">GIRO 90 GRADOS IZQUIERDA</option>
+                                    <option value="GIRO 360 GRADOS DERECHA">GIRO 360 GRADOS DERECHA</option>
+                                    <option value="GIRO 360 GRADOS IZQUIERDA">GIRO 360 GRADOS IZQUIERDA</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Guardar Estado
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Tabla de últimos registros -->
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Últimos 5 Registros</h5>
+                        <button class="btn btn-sm btn-outline-secondary" id="refreshBtn">
+                            <i class="fas fa-sync-alt"></i> Actualizar
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Estado</th>
+                                        <th>IP</th>
+                                        <th>Fecha</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="itemsTable">
+                                    <tr>
+                                        <td colspan="6" class="text-center">Cargando datos...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Sistema de Control IoT</h5>
+                    <p>Aplicación web para gestionar dispositivos IoT mediante API REST</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <h5>Desarrollado por</h5>
+                    <p>Juan Pérez<br>
+                    <a href="mailto:juan.perez@example.com" class="text-white">juan.perez@example.com</a></p>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <p class="mb-0">&copy; 2023 - Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript personalizado -->
+    <script src="js/control.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.card {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border: none;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-header {
+    border-radius: 0.5rem 0.5rem 0 0 !important;
+}
+
+.control-btn {
+    transition: all 0.2s;
+    white-space: normal;
+    word-wrap: break-word;
+    height: 100%;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+#currentStatus {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+footer {
+    margin-top: auto;
+}
+
+.status-ADELANTE {
+    color: #28a745;
+}
+
+.status-ATRAS {
+    color: #dc3545;
+}
+
+.status-DETENER {
+    color: #6c757d;
+}
+
+.status-GIRO {
+    color: #ffc107;
+}
+
+.badge {
+    font-size: 0.85em;
+}
+
+/* Animación para la actualización */
+@keyframes highlight {
+    from { background-color: #ffffcc; }
+    to { background-color: transparent; }
+}
+
+.highlight {
+    animation: highlight 1s ease;
+}
+
+/* Estilos para la página de inicio */
+.display-4 {
+    font-weight: 300;
+}
+
+.lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
