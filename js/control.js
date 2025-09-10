@@ -170,16 +170,18 @@ async function loadItems() {
 function updateCurrentStatus(status) {
     currentStatus.textContent = status;
     
-    // Aplicar clase según el tipo de estado
+    // Limpiar todas las clases de estado previas
     currentStatus.className = 'display-6';
+    
+    // Aplicar nueva clase según el estado
     if (status.includes('ADELANTE')) {
-        currentStatus.classList.add('status-ADELANTE');
+        currentStatus.classList.add('text-success');
     } else if (status.includes('ATRAS')) {
-        currentStatus.classList.add('status-ATRAS');
+        currentStatus.classList.add('text-danger');
     } else if (status === 'DETENER') {
-        currentStatus.classList.add('status-DETENER');
-    } else if (status.includes('GIRO')) {
-        currentStatus.classList.add('status-GIRO');
+        currentStatus.classList.add('text-secondary');
+    } else if (status.includes('GIRO') || status.includes('DERECHA') || status.includes('IZQUIERDA')) {
+        currentStatus.classList.add('text-warning');
     }
 }
 
